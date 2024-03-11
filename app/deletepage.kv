@@ -1,0 +1,14 @@
+<DeletePage>:
+    name: 'delete'
+    navigator: _navigator
+    on_enter: app.SCRMGMT.update_nav(self.navigator)
+    on_leave: app.SCRMGMT.reset_nav_buttons(self.navigator)
+    BoxLayout:
+        orientation: 'vertical'
+        NavigationTabs:
+            id: _navigator
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            Label:
+                text: 'Delete Page'

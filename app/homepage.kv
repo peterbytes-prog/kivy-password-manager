@@ -1,0 +1,24 @@
+<HomePage>:
+    name: 'home'
+    navigator: _navigator
+    on_enter: app.SCRMGMT.update_nav(self.navigator)
+    on_leave: app.SCRMGMT.reset_nav_buttons(self.navigator)
+    BoxLayout:
+        orientation: 'vertical'
+        NavigationTabs:
+            id: _navigator
+        AnchorLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                Button:
+                    text: 'Create/Edit'
+                    on_press: root.manager.current = 'create_edit'
+                Button:
+                    text: 'List'
+                    on_press: root.manager.current = 'list'
+                Button:
+                    text: 'Delete'  # Consider removing or integrating with List/Detail Page
+                    on_press: root.manager.current = 'delete'
+                Button:
+                    text: 'Detail'
+                    on_press: root.manager.current = 'detail'
