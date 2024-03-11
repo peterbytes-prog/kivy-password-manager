@@ -1,28 +1,24 @@
+<NavButton@ToggleButton>:
+    text: ''
+    key: ''
+    group: 'nav'
+    # on_press: app.change_screen(self.key)
+    on_state: 'down' if app.change_screen(self.key) == self.key else 'normal'
 <NavigationTabs>:
     size_hint_y: None
     height: '48dp'
     orientation: 'horizontal'
-    ToggleButton:
+    NavButton:
         text: 'Home'
         key: 'home'
-        group: 'nav'
-        # on_press: app.change_screen(self.key)
-        on_state: 'down' if app.change_screen(self.key) == self.key else 'normal' #'down' if app.SCRMGMT.current == 'home' else 'normal'
 
-    ToggleButton:
+    NavButton:
         text: 'Create/Edit'
         key: 'create_edit'
-        group: 'nav'
-        on_state: 'down' if app.change_screen(self.key) == self.key else 'normal'
 
-
-    ToggleButton:
+    NavButton:
         text: 'List'
         key: 'list'
-        group: 'nav'
-        on_state: 'down' if app.change_screen(self.key) == self.key else 'normal'
-    ToggleButton:
+    NavButton:
         text: 'Detail'
         key: 'detail'
-        group: 'nav'
-        on_state: 'down' if app.change_screen(self.key) == self.key else 'normal'
