@@ -10,5 +10,14 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'center'
-            Label:
-                text: 'List Page'
+            BoxLayout:
+                orientation: 'vertical'
+                RecycleView:
+                    id: list_view
+                    viewclass: 'Button'  # Use Button for now
+                    RecycleBoxLayout:
+                        default_size: None, dp(56)  # Adjust height as needed
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        orientation: 'vertical'

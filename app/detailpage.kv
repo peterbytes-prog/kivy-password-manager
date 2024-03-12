@@ -1,3 +1,15 @@
+<VtextureLabel@Label>:
+    size_hint: 1, None
+    text_size: root.width, None
+    size: self.texture_size
+    padding: 15
+    canvas.before:
+        Color:
+            rgba: 1,1,1,0.01
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
 <DetailPage>:
     name: 'detail'
     navigator: _navigator
@@ -10,5 +22,77 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'center'
-            Label:
-                text: 'Detail Page'
+
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10
+                spacing: 10
+
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    VtextureLabel:
+                        text: 'Title:'
+                        halign: 'right'
+
+                    VtextureLabel:
+                        id: detail_title
+                        text: ''
+                        halign: 'left'
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+                    VtextureLabel:
+                        text: 'Username:'
+                        halign: 'right'
+
+                    VtextureLabel:
+                        id: detail_username
+                        text: ''
+                        halign: 'left'
+
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+                    VtextureLabel:
+                        text: 'Password:'
+                        halign: 'right'
+
+                    VtextureLabel:
+                        id: detail_password
+                        text: ''
+                        halign: 'left'
+
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+                    VtextureLabel:
+                        text: 'PK:'
+                        halign: 'right'
+
+                    VtextureLabel:
+                        id: detail_pk
+                        text: ''
+                        halign: 'left'
+
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: '48dp'
+                    Button:
+                        text: 'Edit'
+                        on_press: root.edit_entry()
+                    Button:
+                        text: 'Delete'
+                        on_press: root.delete_entry()

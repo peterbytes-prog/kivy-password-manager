@@ -10,5 +10,20 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'center'
-            Label:
-                text: 'Delete Page'
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10
+                spacing: 10
+                Label:
+                    id: delete_label
+                    text: 'Are you sure you want to delete this entry?'
+                BoxLayout:
+                    size_hint_y: None
+                    height: '48dp'
+                    Button:
+                        text: 'Delete'
+                        on_press: root.delete_entry()
+                    Button:
+                        text: 'Cancel'
+                        on_press: root.manager.current = 'list'
