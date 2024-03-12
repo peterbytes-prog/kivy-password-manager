@@ -4,3 +4,5 @@ Builder.load_file("utils.kv")
 
 class NavigationTabs(BoxLayout):
     pass
+class NavigationTabsDetail(BoxLayout):
+    pass

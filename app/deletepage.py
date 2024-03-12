@@ -1,5 +1,5 @@
 from kivy.uix.screenmanager import Screen
-from utils import NavigationTabs
+# from utils import NavigationTabs
 from kivy.lang import Builder
 import sqlite3
 

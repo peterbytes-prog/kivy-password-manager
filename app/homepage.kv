@@ -1,3 +1,19 @@
+<RespButton@AnchorLayout>:
+    anchor_y: 'center'
+    anchor_y: 'center'
+    btn_size: [300, 0]
+    text: ""
+    size_hint: 1,None
+    size: max((100,btn.texture_size[0])), max((100,btn.texture_size[1]))
+    press: lambda: None
+    Button:
+        text: root.text
+        id: btn
+        size_hint: None, None
+        size: root.btn_size[0] if root.btn_size[0] else self.texture_size[0], root.btn_size[1] if root.btn_size[1] else self.texture_size[1]
+        on_press: root.press()
+        padding: 30, 15
+
 <HomePage>:
     name: 'home'
     navigator: _navigator
@@ -8,17 +24,90 @@
         NavigationTabs:
             id: _navigator
         AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+
             BoxLayout:
                 orientation: 'vertical'
-                Button:
-                    text: 'Create/Edit'
-                    on_press: root.manager.current = 'create_edit'
-                Button:
-                    text: 'List'
-                    on_press: root.manager.current = 'list'
-                Button:
-                    text: 'Delete'  # Consider removing or integrating with List/Detail Page
-                    on_press: root.manager.current = 'delete'
-                Button:
-                    text: 'Detail'
-                    on_press: root.manager.current = 'detail'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    GridLayout:
+                        cols: 1
+                        spacing: 10
+                        size_hint: 0.8, None
+                        height: self.minimum_height
+                        RespButton:
+                            text: 'Login'
+                            press: root.show_login_popup
+                            btn_size: 300, 0
+                            # size_hint: 1, None
+                            # size: 0, 100
+                        RespButton:
+                            text: 'Sign Up'
+                            press: root.show_signup_popup
+                            btn_size: 300, 0
+                            # size_hint: 1, None
+                            # size: 0, 100
+
+
+
+
+
+<LoginPopup>:
+    size_hint: .75, .5
+    auto_dismiss: False
+    title: 'Login'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: ''
+            id: login_status
+            size_hint: None, None
+            size: self.texture_size
+
+        TextInput:
+            id: login_username
+            hint_text: 'Username'
+        TextInput:
+            id: login_password
+            hint_text: 'Password'
+            password: True
+        RespButton:
+            text: 'Login'
+            press: root.login
+
+            # Here, you would add the logic to handle the login process
+        RespButton:
+            text: 'Cancel'
+            press: root.dismiss
+
+<SignupPopup>:
+    size_hint: .75, .5
+    auto_dismiss: False
+    title: 'Sign Up'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: ''
+            id: signup_status
+            size_hint: None, None
+            size: self.texture_size
+        TextInput:
+            id: signup_username
+            hint_text: 'Username'
+        TextInput:
+            id: signup_password
+            hint_text: 'Password'
+            password: True
+        TextInput:
+            id: signup_password_confirm
+            hint_text: 'Confirm Password'
+            password: True
+        RespButton:
+            text: 'Sign Up'
+            press: root.signup
+            # Here, you would add the logic to handle the signup process
+        RespButton:
+            text: 'Cancel'
+            on_press: root.dismiss
