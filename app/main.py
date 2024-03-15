@@ -7,11 +7,13 @@ from screenmanagement import ScreenManagement
 # Main App class
 class PasswordManagerApp(App):
     SCRMGMT = ObjectProperty()
+    current_user = ObjectProperty(None)
 
     def change_screen(self, screen_name):
-        print(self.SCRMGMT.current, screen_name)
         # Check if the root widget is available
         if self.SCRMGMT:
+            if not self.current_user:
+                screen_name = 'home'
             if (self.SCRMGMT.current != screen_name):
                  self.SCRMGMT.current = screen_name
             else:
@@ -20,6 +22,11 @@ class PasswordManagerApp(App):
         else:
             print("ScreenManager is not yet initialized.")
         return self.SCRMGMT.current
+    def set_current_user(self, user_id, username):
+        self.current_user = {'id': user_id, 'username': username}
+
+    def clear_current_user(self):
+        self.current_user = None
 
     def build(self):
         self.SCRMGMT = ScreenManagement()

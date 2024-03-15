@@ -28,8 +28,10 @@ class LoginPopup(Popup):
             self.ids.login_status.text = 'Username and password required.'
             return
         # Assuming you have a method to check credentials:
-        if self.check_credentials(username, password):
+        user_id, username = self.check_credentials(username, password)
+        if user_id and username:
             self.dismiss()  # Close the popup on successful login
+            App.get_running_app().set_current_user(user_id, username)
             App.get_running_app().root.current = 'list'  # Navigate to the main screen
         else:
             self.ids.login_status.text = 'Invalid username or password.'
@@ -37,13 +39,15 @@ class LoginPopup(Popup):
     def check_credentials(self, username, password):
         conn = sqlite3.connect('passwords.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT password FROM users WHERE username=?", (username,))
-        stored_password = cursor.fetchone()
+        cursor.execute("SELECT id, password FROM users WHERE username=?", (username,))
+        user = cursor.fetchone()
         conn.close()
 
-        if stored_password and bcrypt.checkpw(password.encode('utf-8'), stored_password[0]):
-            return True
-        return False
+        if user and bcrypt.checkpw(password.encode('utf-8'), user[1]):
+            user_id, _ = user  # user[0] is id, user[1] is the password
+            return user_id, username
+        return None, None
+
 
 class SignupPopup(Popup):
     def signup(self, *args, **kwargs):
@@ -62,7 +66,7 @@ class SignupPopup(Popup):
         if self.add_user(username, password):
             self.ids.signup_status.text = 'Account Created'
             self.dismiss()  # Close the popup on successful signup
-            App.get_running_app().SCRMGMT.current = 'list'
+            App.get_running_app().SCRMGMT.current = 'home'
 
             # Possibly show a success message or directly log in the user
         else:

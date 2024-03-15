@@ -1,4 +1,5 @@
 from kivy.uix.screenmanager import Screen
+from kivy.app import App
 from utils import NavigationTabs, NavigationTabsDetail
 import sqlite3
 from kivy.lang import Builder
@@ -9,10 +10,11 @@ class DetailPage(Screen):
         self.display_details()
 
     def display_details(self):
+        user_id = App.get_running_app().current_user['id']
         conn = sqlite3.connect('passwords.db')
         c = conn.cursor()
         pk = self.manager.current_pk
-        c.execute("SELECT * FROM passwords WHERE id=?", (pk,))
+        c.execute("SELECT * FROM passwords WHERE id=? AND user_id=?", (pk,user_id, ))
         entry = c.fetchone()
         conn.close()
 

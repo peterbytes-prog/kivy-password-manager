@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from utils import NavigationTabs
+from kivy.app import App
 from kivy.lang import Builder
 import sqlite3
 
@@ -13,9 +14,10 @@ class CreateEditPage(Screen):
             self.clear_form()
 
     def load_entry_details(self):
+        user_id = App.get_running_app().current_user['id']
         conn = sqlite3.connect('passwords.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM passwords WHERE id=?", (self.manager.current_pk,))
+        c.execute("SELECT * FROM passwords WHERE id=? AND user_id=?", (self.manager.current_pk, user_id, ))
         entry = c.fetchone()
         conn.close()
 
@@ -30,6 +32,7 @@ class CreateEditPage(Screen):
         self.ids.password_input.text = ''
 
     def save_or_update_entry(self):
+        user_id = App.get_running_app().current_user['id']
         title = self.ids.title_input.text
         username = self.ids.username_input.text
         password = self.ids.password_input.text
@@ -39,8 +42,8 @@ class CreateEditPage(Screen):
             c.execute("UPDATE passwords SET title=?, username=?, password=? WHERE id=?",
                       (title, username, password, self.manager.current_pk))
         else:  # Insert new entry
-            c.execute("INSERT INTO passwords (title, username, password) VALUES (?, ?, ?)",
-                      (title, username, password))
+            c.execute("INSERT INTO passwords (title, username, password, user_id) VALUES (?, ?, ?, ?)",
+                      (title, username, password, user_id))
         conn.commit()
         conn.close()
         self.clear_form()

@@ -11,24 +11,23 @@
             anchor_x: 'center'
             anchor_y: 'center'
 
-        BoxLayout:
-            orientation: 'vertical'
-            TextInput:
-                id: title_input
-                hint_text: 'Title'
-            TextInput:
-                id: username_input
-                hint_text: 'Username'
-            TextInput:
-                id: password_input
-                hint_text: 'Password'
-                password: True
-            BoxLayout:
-                size_hint_y: None
-                height: '48dp'
-                Button:
-                    text: 'Save'
-                    on_press: root.save_or_update_entry()
-                Button:
-                    text: 'Cancel'
-                    on_press: root.manager.current = 'list'
+            MainBody:
+                TextInput:
+                    id: title_input
+                    hint_text: 'Title'
+                TextInput:
+                    id: username_input
+                    hint_text: 'Username'
+                TextInput:
+                    id: password_input
+                    hint_text: 'Password'
+                    password: True
+                BoxLayout:
+                    size_hint_y: None
+                    height: '48dp'
+                    Button:
+                        text: 'Save'
+                        on_press: root.save_or_update_entry()
+                    Button:
+                        text: 'Cancel'
+                        on_press: root.manager.current = 'list'
