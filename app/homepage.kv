@@ -1,3 +1,5 @@
+<WarningLabel@Label>:
+    color: 1,0,0,1
 <RespButton@AnchorLayout>:
     anchor_y: 'center'
     anchor_y: 'center'
@@ -60,7 +62,7 @@
     title: 'Login'
     BoxLayout:
         orientation: 'vertical'
-        Label:
+        WarningLabel:
             text: ''
             id: login_status
             size_hint: None, None
@@ -88,7 +90,7 @@
     title: 'Sign Up'
     BoxLayout:
         orientation: 'vertical'
-        Label:
+        WarningLabel:
             text: ''
             id: signup_status
             size_hint: None, None
