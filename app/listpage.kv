@@ -11,6 +11,16 @@
             anchor_x: 'center'
             anchor_y: 'center'
             MainBody:
+                AnchorLayout:
+                    anchor_x: 'right'
+                    anchor_y: 'center'
+                    size_hint_y: None
+                    height: 100
+                    TextInput:
+                        id: search_input
+                        size_hint_x: 0.7
+                        hint_text: 'Search...'
+                        on_text: root.filter_list(self.text)
                 RecycleView:
                     id: list_view
                     viewclass: 'Button'  # Use Button for now
